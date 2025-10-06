@@ -1,0 +1,145 @@
+ChestXray14: 
+  data_dir: /scratch/dbasina/ChestXray14/images
+  train_list: dataset/Xray14_train_official.txt
+  val_list: dataset/Xray14_val_official.txt
+  test_list:  dataset/Xray14_test_official.txt
+  diseases: ['Atelectasis', 'Cardiomegaly', 'Effusion', 'Infiltration', 'Mass', 'Nodule', 'Pneumonia', 'Pneumothorax', 'Consolidation', 'Edema', 'Emphysema', 'Fibrosis', 'Pleural_Thickening', 'Hernia']
+  task_type: multi-label classification
+
+CheXpert: 
+  data_dir: /scratch/dbasina/CheXpert-v1.0/
+  train_list: dataset/CheXpert-v1.0_train.csv
+  val_list: dataset/CheXpert-v1.0_valid.csv
+  test_list: dataset/CheXpert-v1.0_valid.csv
+  diseases: ['No Finding', 'Enlarged Cardiomediastinum', 'Cardiomegaly', 'Lung Opacity', 'Lung Lesion', 'Edema', 'Consolidation', 'Pneumonia', 'Atelectasis', 'Pneumothorax', 'Pleural Effusion', 'Pleural Other', 'Fracture', 'Support Devices']
+  test_diseases_name: ['Atelectasis', 'Cardiomegaly', 'Consolidation', 'Edema', 'Pleural Effusion']
+  task_type: multi-label classification
+
+Shenzhen: 
+  data_dir: <PATH_TO_DATASET>/ShenzhenHospitalXray/ChinaSet_AllFiles/CXR_png/
+  train_list: dataset/ShenzenCXR_train_data.txt
+  val_list: dataset/ShenzenCXR_valid_data.txt
+  test_list: dataset/ShenzenCXR_test_data.txt
+  diseases: ['TB']
+  task_type: binary classification
+
+VinDrCXR: 
+  data_dir: <PATH_TO_DATASET>/VinDr-CXR/physionet.org/files/vindr-cxr/1.0.0/
+  train_list: dataset/VinDrCXR_train_pe_global_one.txt
+  val_list: dataset/VinDrCXR_test_pe_global_one.txt
+  test_list: dataset/VinDrCXR_test_pe_global_one.txt
+  diseases: ['PE', 'Lung tumor', 'Pneumonia', 'Tuberculosis', 'Other diseases', 'No finding']
+  task_type: multi-label classification
+
+RSNAPneumonia: 
+  data_dir: <PATH_TO_DATASET>/rsna-pneumonia-detection-challenge/stage_2_train_images_png/
+  train_list: dataset/RSNAPneumonia_train.txt
+  val_list: dataset/RSNAPneumonia_val.txt
+  test_list: dataset/RSNAPneumonia_test.txt
+  diseases: ['Normal', 'No Lung Opacity/Not Normal', 'Lung Opacity']
+  task_type: multi-class classification
+
+MIMIC: 
+  data_dir: /scratch/dpraja12/data/mimic/
+  train_list: dataset/mimic-cxr-2.0.0-train.csv
+  val_list: dataset/mimic-cxr-2.0.0-validate.csv
+  test_list: dataset/mimic-cxr-2.0.0-test.csv
+  diseases: ['No Finding', 'Enlarged Cardiomediastinum', 'Cardiomegaly', 'Lung Opacity', 'Lung Lesion', 'Edema', 'Consolidation', 'Pneumonia', 'Atelectasis', 'Pneumothorax', 'Pleural Effusion', 'Pleural Other', 'Fracture', 'Support Devices']
+  test_diseases_name: ['Atelectasis', 'Cardiomegaly', 'Consolidation', 'Edema', 'Pleural Effusion']
+  task_type: multi-label classification
+
+PathMNIST:
+  data_dir: /scratch/dbasina/MedMNIST/medmnist_224/pathmnist
+  train_list: /scratch/dbasina/MedMNIST/medmnist_224/pathmnist_train.csv
+  val_list: /scratch/dbasina/MedMNIST/medmnist_224/pathmnist_val.csv
+  test_list: /scratch/dbasina/MedMNIST/medmnist_224/pathmnist_test.csv
+  diseases: ['adipose', 'background', 'debris', 'lymphocytes', 'mucus', 'smooth muscle', 'normal colon mucosa', 'cancer-associated stroma', 'colorectal adenocarcinoma epithelium']
+  task_type: multi-class classification
+  
+ChestMNIST:
+  data_dir: /scratch/dbasina/MedMNIST/medmnist_224
+  train_list: /scratch/dbasina/MedMNIST/medmnist_224/chestmnist_train.csv
+  val_list: /scratch/dbasina/MedMNIST/medmnist_224/chestmnist_val.csv
+  test_list: /scratch/dbasina/MedMNIST/medmnist_224/chestmnist_test.csv
+  diseases: ['atelectasis', 'cardiomegaly', 'effusion', 'infiltration', 'mass', 'nodule', 'pneumonia', 'pneumothorax', 'consolidation', 'edema', 'emphysema', 'fibrosis', 'pleural', 'hernia']
+  task_type: multi-label classification
+
+DermaMNIST:
+  data_dir: /scratch/dbasina/MedMNIST/medmnist_224
+  train_list: /scratch/dbasina/MedMNIST/medmnist_224/dermamnist_train.csv
+  val_list: /scratch/dbasina/MedMNIST/medmnist_224/dermamnist_val.csv
+  test_list: /scratch/dbasina/MedMNIST/medmnist_224/dermamnist_test.csv
+  diseases: ['actinic keratoses and intraepithelial carcinoma', 'basal cell carcinoma', 'benign keratosis-like lesions', 'dermatofibroma', 'melanoma', 'melanocytic nevi', 'vascular lesions']
+  task_type: multi-class classification
+
+OCTMNIST:
+  data_dir: /scratch/dbasina/MedMNIST/medmnist_224
+  train_list: /scratch/dbasina/MedMNIST/medmnist_224/octmnist_train.csv
+  val_list: /scratch/dbasina/MedMNIST/medmnist_224/octmnist_val.csv
+  test_list: /scratch/dbasina/MedMNIST/medmnist_224/octmnist_test.csv
+  diseases: ['choroidal neovascularization', 'diabetic macular edema', 'drusen', 'normal']
+  task_type: multi-class classification
+
+PneumoniaMNIST:
+  data_dir: /scratch/dbasina/MedMNIST/medmnist_224
+  train_list: /scratch/dbasina/MedMNIST/medmnist_224/pneumoniamnist_train.csv
+  val_list: /scratch/dbasina/MedMNIST/medmnist_224/pneumoniamnist_val.csv
+  test_list: /scratch/dbasina/MedMNIST/medmnist_224/pneumoniamnist_test.csv
+  diseases: ['normal', 'pneumonia']
+  task_type: binary classification
+
+RetinaMNIST:
+  data_dir: /scratch/dbasina/MedMNIST/medmnist_224
+  train_list: /scratch/dbasina/MedMNIST/medmnist_224/retinamnist_train.csv
+  val_list: /scratch/dbasina/MedMNIST/medmnist_224/retinamnist_val.csv
+  test_list: /scratch/dbasina/MedMNIST/medmnist_224/retinamnist_test.csv
+  diseases: ['0', '1', '2', '3', '4']
+  task_type: ordinal regression
+
+BreastMNIST:
+  data_dir: /scratch/dbasina/MedMNIST/medmnist_224
+  train_list: /scratch/dbasina/MedMNIST/medmnist_224/breastmnist_train.csv
+  val_list: /scratch/dbasina/MedMNIST/medmnist_224/breastmnist_val.csv
+  test_list: /scratch/dbasina/MedMNIST/medmnist_224/breastmnist_test.csv
+  diseases: ['malignant', 'normal, benign']
+  task_type: binary classification
+
+BloodMNIST:
+  data_dir: /scratch/dbasina/MedMNIST/medmnist_224
+  train_list: /scratch/dbasina/MedMNIST/medmnist_224/bloodmnist_train.csv
+  val_list: /scratch/dbasina/MedMNIST/medmnist_224/bloodmnist_val.csv
+  test_list: /scratch/dbasina/MedMNIST/medmnist_224/bloodmnist_test.csv
+  diseases: ['basophil', 'eosinophil', 'erythroblast', 'immature granulocytes(myelocytes, metamyelocytes and promyelocytes)', 'lymphocyte', 'monocyte', 'neutrophil', 'platelet']
+  task_type: multi-class classification
+
+TissueMNIST:
+  data_dir: /scratch/dbasina/MedMNIST/medmnist_224
+  train_list: /scratch/dbasina/MedMNIST/medmnist_224/tissuemnist_train.csv
+  val_list: /scratch/dbasina/MedMNIST/medmnist_224/tissuemnist_val.csv
+  test_list: /scratch/dbasina/MedMNIST/medmnist_224/tissuemnist_test.csv
+  diseases: ['Collecting Duct, Connecting Tubule', 'Distal Convoluted Tubule', 'Glomerular endothelial cells', 'Interstitial endothelial cells', 'Leukocytes', 'Podocytes', 'Proximal Tubule Segments', 'Thick Ascending Limb']
+  task_type: multi-class classification
+
+OrganAMNIST:
+  data_dir: /scratch/dbasina/MedMNIST/medmnist_224
+  train_list: /scratch/dbasina/MedMNIST/medmnist_224/organamnist_train.csv
+  val_list: /scratch/dbasina/MedMNIST/medmnist_224/organamnist_val.csv
+  test_list: /scratch/dbasina/MedMNIST/medmnist_224/organamnist_test.csv
+  diseases: ['bladder', 'femur-left', 'femur-right', 'heart', 'kidney-left', 'kidney-right', 'liver', 'lung-left', 'lung-right', 'pancreas', 'spleen']
+  task_type: multi-class classification
+
+OrganCMNIST:
+  data_dir: /scratch/dbasina/MedMNIST/medmnist_224
+  train_list: /scratch/dbasina/MedMNIST/medmnist_224/organcmnist_train.csv
+  val_list: /scratch/dbasina/MedMNIST/medmnist_224/organcmnist_val.csv
+  test_list: /scratch/dbasina/MedMNIST/medmnist_224/organcmnist_test.csv
+  diseases: ['bladder', 'femur-left', 'femur-right', 'heart', 'kidney-left', 'kidney-right', 'liver', 'lung-left', 'lung-right', 'pancreas', 'spleen']
+  task_type: multi-class classification
+
+OrganSMNIST:
+  data_dir: /scratch/dbasina/MedMNIST/medmnist_224
+  train_list: /scratch/dbasina/MedMNIST/medmnist_224/organsmnist_train.csv
+  val_list: /scratch/dbasina/MedMNIST/medmnist_224/organsmnist_val.csv
+  test_list: /scratch/dbasina/MedMNIST/medmnist_224/organsmnist_test.csv
+  diseases: ['bladder', 'femur-left', 'femur-right', 'heart', 'kidney-left', 'kidney-right', 'liver', 'lung-left', 'lung-right', 'pancreas', 'spleen']
+  task_type: multi-class classification

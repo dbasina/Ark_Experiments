@@ -1,0 +1,32 @@
+python -u main_ark.py \
+ --data_set PathMNIST --data_set ChestMNIST --data_set DermaMNIST --data_set OCTMNIST \
+ --data_set PneumoniaMNIST --data_set RetinaMNIST --data_set BreastMNIST --data_set BloodMNIST \
+ --data_set TissueMNIST --data_set OrganAMNIST --data_set OrganCMNIST --data_set OrganSMNIST \
+ --model swin_base --pretrain_epochs 100 --batch_size 32 --lr 0.0001 --test_epoch 1 \
+ --from_checkpoint --checkpoint_path ./Models/swin_base_Random/Ark_PathMNIST_ChestMNIST_DermaMNIST_OCTMNIST_PneumoniaMNIST_RetinaMNIST_BreastMNIST_BloodMNIST_TissueMNIST_OrganAMNIST_OrganCMNIST_OrganSMNIST/ark_MedMNIST2d_224/Ark_PathMNIST_ChestMNIST_DermaMNIST_OCTMNIST_PneumoniaMNIST_RetinaMNIST_BreastMNIST_BloodMNIST_TissueMNIST_OrganAMNIST_OrganCMNIST_OrganSMNIST.pth.tar \
+ --exp_name ark_MedMNIST2d_224_continue\
+ > Logs/ark_MedMNIST2d_224_continue.log 2>&1
+
+Experiment: ImageNet_1k,convnext, CheXpert, ChestXray14 
+python -u main_ark.py \
+ --data_set ChestXray14 --data_set CheXpert --model convnext_base --init ImageNet_1k --pretrain_epochs 1 --batch_size 32 --lr 0.0001 --test_epoch 1 \
+ --exp_name ark_convnext_ImageNet1k_DualDataset_test\
+ > Logs/ark_convnext_ImageNet1k_DualDataset.log 2>&1
+
+Experiment: ImageNet_1k, swin, CheXpert, ChestXray14 
+python -u main_ark.py \
+ --data_set ChestXray14 --data_set CheXpert --model swin_base --init ImageNet_1k --pretrain_epochs 1 --batch_size 32 --lr 0.0001 --test_epoch 1 \
+ --exp_name ark_swin_ImageNet1k_DualDataset\
+ > Logs/ark_swin_ImageNet1k_DualDataset_test.log 2>&1
+
+Experiment: ImageNet_1k, swin, MIMIC 
+python -u main_ark.py \
+ --data_set MIMIC --model swin_base --init ImageNet_1k --pretrain_epochs 1 --batch_size 32 --lr 0.0001 --test_epoch 1 \
+ --exp_name ark_swin_ImageNet1k_MIMIC_test\
+ > Logs/ark_swin_ImageNet1k_MIMIC_test.log 2>&1
+
+Experiment: ImageNet_1k, swin, BreastMNIST, Individual
+python -u main_ark.py \
+ --data_set BreastMNIST --model swin_base --init ImageNet_1k --individual --pretrain_epochs 100 --batch_size 32 --lr 0.0001 --test_epoch 100 \
+ --exp_name ark_swin_ImageNet1k_BreastMNIST_test\
+ > Logs/ark_swin_ImageNet1k_BreastMNIST_test.log 2>&1

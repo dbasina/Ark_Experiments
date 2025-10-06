@@ -1,0 +1,23 @@
+/home/divesh-basina/Documents/venv/lib/python3.12/site-packages/timm/models/helpers.py:7: FutureWarning: Importing from timm.models.helpers is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+{'GPU': None, 'model_name': 'convnext_base', 'init': 'Random', 'pretrained_weights': 'Ark_MICCAI2023/Models/swin_base_patch4_window7_224_22kto1k.pth', 'from_checkpoint': False, 'dataset_list': ['CheXpertMini'], 'normalization': 'imagenet', 'img_size': 224, 'img_depth': 3, 'batch_size': 4, 'epochs': 200, 'exp_name': 'ark_convnext_test', 'ema_mode': 'epoch', 'momentum_teacher': 0.9, 'pretrain_epochs': 2, 'test_epoch': 1, 'val_loss_metric': 'average', 'projector_features': 1376, 'use_mlp': False, 'opt': 'momentum', 'opt_eps': 1e-08, 'opt_betas': None, 'clip_grad': None, 'momentum': 0.9, 'weight_decay': 0.0, 'sched': 'cosine', 'lr': 0.0001, 'lr_noise': None, 'lr_noise_pct': 0.67, 'lr_noise_std': 1.0, 'warmup_lr': 1e-06, 'min_lr': 1e-05, 'decay_epochs': 30, 'warmup_epochs': 0, 'cooldown_epochs': 10, 'decay_rate': 0.5, 'patience_epochs': 10, 'resume': False, 'workers': 4, 'print_freq': 50, 'test_augment': True, 'anno_percent': 100, 'device': 'cuda', 'activate': 'Sigmoid', 'uncertain_label': 'LSR-Ones', 'unknown_label': 0}
+/home/divesh-basina/Documents/venv/lib/python3.12/site-packages/albumentations/core/validation.py:114: UserWarning: ShiftScaleRotate is a special case of Affine transform. Please use Affine transform instead.
+  original_init(self, **validated_kwargs)
+##DEBUG## Dataset_list: ['CheXpertMini']
+num_classes_list: [14]
+##DEBUG## Head 0: CheXpertMini -> 14 classes
+No checkpoint found at 'Ark_MICCAI2023/Models/swin_base_patch4_window7_224_22kto1k.pth'
+Traceback (most recent call last):
+  File "/home/divesh-basina/Documents/cse507/ARK/Ark/Ark_MICCAI2023/main_ark.py", line 142, in <module>
+    main(args)
+  File "/home/divesh-basina/Documents/cse507/ARK/Ark/Ark_MICCAI2023/main_ark.py", line 138, in main
+    ark_engine(args, model_path, output_path, args.dataset_list, datasets_config, dataset_train_list, dataset_val_list, dataset_test_list)
+  File "/home/divesh-basina/Documents/cse507/ARK/Ark/Ark_MICCAI2023/engine.py", line 77, in ark_engine
+    model = build_omni_model(args, num_classes_list)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/divesh-basina/Documents/cse507/ARK/Ark/Ark_MICCAI2023/models.py", line 185, in build_omni_model
+    state_dict = load_state_dict(args.pretrained_weights)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/divesh-basina/Documents/venv/lib/python3.12/site-packages/timm/models/_helpers.py", line 87, in load_state_dict
+    raise FileNotFoundError()
+FileNotFoundError
