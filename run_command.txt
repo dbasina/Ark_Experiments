@@ -46,6 +46,6 @@ python -u main_ark.py \
 
 Experiment: Resume Example
 python -u main_ark.py \
- --data_set MIMIC --model convnext_base --individual --pretrain_epochs 100 --batch_size 32  --test_epoch 100 --anno_percent 2\
+ --data_set MIMIC --model convnext_base --individual --pretrain_epochs 5 --batch_size 32  --test_epoch 1 --anno_percent 100\
  --exp_name ark_convnext_ImageNet1k_MIMIC_test --pretrained_weights /home/ssubbar8/Ark_individual/Ark_Experiments/Models/convnext_base_ImageNet_1k/Ark_MIMIC/ark_convnext_ImageNet1k_MIMIC_test/Ark_MIMIC.pth.tar\
  > Logs/ark_convnext_ImageNet1k_MIMIC_test.log 2>&1
