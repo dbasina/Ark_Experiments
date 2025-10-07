@@ -126,15 +126,15 @@ def main(args):
     for dataset in args.dataset_list:
         dataset_train_list.append(
             dict_dataloarder[dataset](images_path=datasets_config[dataset]['data_dir'], file_path=datasets_config[dataset]['train_list'],
-                                 augment=None)
+                                 augment=None, annotation_percent = args.anno_percent)
         )
         dataset_val_list.append(
             dict_dataloarder[dataset](images_path=datasets_config[dataset]['data_dir'], file_path=datasets_config[dataset]['val_list'],
-                                 augment=build_transform_classification(normalize=args.normalization, mode="valid"))
+                                 augment=build_transform_classification(normalize=args.normalization, mode="valid"), annotation_percent = args.anno_percent)
         )
         dataset_test_list.append(
             dict_dataloarder[dataset](images_path=datasets_config[dataset]['data_dir'], file_path=datasets_config[dataset]['test_list'],
-                                 augment=build_transform_classification(normalize=args.normalization, mode="test"))
+                                 augment=build_transform_classification(normalize=args.normalization, mode="test"), annotation_percent = args.anno_percent)
         )
 
     ark_engine(args, model_path, output_path, args.dataset_list, datasets_config, dataset_train_list, dataset_val_list, dataset_test_list)
