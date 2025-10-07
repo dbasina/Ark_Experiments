@@ -5,8 +5,8 @@ import copy
 import csv
 import medmnist
 from medmnist import INFO
-from PIL import Image
-
+from PIL import Image, ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 from torch.utils.data import Dataset
 import torchvision.transforms as transforms
 from torch.utils.data.dataset import Dataset
