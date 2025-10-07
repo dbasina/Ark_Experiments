@@ -86,7 +86,7 @@ def build_ts_transformations():
 
 class ChestXray14(Dataset):
 
-  def __init__(self, images_path, file_path, augment, num_class=14, annotation_percent=2):
+  def __init__(self, images_path, file_path, augment, num_class=14, annotation_percent=100):
 
     self.img_list = []
     self.img_label = []
@@ -157,7 +157,7 @@ class ChestXray14(Dataset):
 class CheXpert(Dataset):
 
   def __init__(self, images_path, file_path, augment, num_class=14,
-               uncertain_label="LSR-Ones", unknown_label=0, annotation_percent=2):
+               uncertain_label="LSR-Ones", unknown_label=0, annotation_percent=100):
 
     self.img_list = []
     self.img_label = []
@@ -440,7 +440,7 @@ class RSNAPneumonia(Dataset):
 class MIMIC(Dataset):
 
   def __init__(self, images_path, file_path, augment, num_class=14,
-               uncertain_label="Ones", unknown_label=0, annotation_percent=2):
+               uncertain_label="Ones", unknown_label=0, annotation_percent=100):
 
     self.img_list = []
     self.img_label = []

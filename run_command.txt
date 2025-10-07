@@ -30,3 +30,15 @@ python -u main_ark.py \
  --data_set BreastMNIST --model swin_base --init ImageNet_1k --individual --pretrain_epochs 100 --batch_size 32 --lr 0.0001 --test_epoch 100 \
  --exp_name ark_swin_ImageNet1k_BreastMNIST_test\
  > Logs/ark_swin_ImageNet1k_BreastMNIST_test.log 2>&1
+
+Experiment: ImageNet_1k, swin, BreastMNIST, Individual
+python -u main_ark.py \
+ --data_set BreastMNIST --model swin_base --init ImageNet_1k --individual --pretrain_epochs 100 --batch_size 32 --lr 0.0001 --test_epoch 100 \
+ --exp_name ark_swin_ImageNet1k_BreastMNIST_test\
+ > Logs/ark_swin_ImageNet1k_BreastMNIST_test.log 2>&1
+
+Experiment: ImageNet_1k, convnext, MIMIC, Individual
+python -u main_ark.py \
+ --data_set MIMIC --model convnext_base --init ImageNet_1k --individual --pretrain_epochs 100 --batch_size 32  --test_epoch 100 --anno_percent 2\
+ --exp_name ark_convnext_ImageNet1k_MIMIC_test\
+ > Logs/ark_convnext_ImageNet1k_MIMIC_test.log 2>&1
