@@ -21,7 +21,7 @@ def get_args_parser():
 
     parser.add_option("--GPU", dest="GPU", help="the index of gpu is used", default=None, action="callback",
                       callback=vararg_callback_int)
-    parser.add_option("--model", dest="model_name", help="vit_base|vit_small|swin_base|swin_tiny|convnext_base", default="vit_base", type="string")
+    parser.add_option("--model", dest="model_name", help="vit_base|vit_small|swin_base|swin_tiny|convnext_base|internimage_base", default="vit_base", type="string")
     parser.add_option("--init", dest="init",
                       help="Random| ImageNet_1k| ImageNet_21k| SAM| DeiT| BEiT| DINO| MoCo_V3| MoBY | MAE| SimMIM",
                       default="Random", type="string")

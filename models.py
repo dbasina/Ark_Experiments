@@ -5,9 +5,66 @@ from torch.hub import load_state_dict_from_url
 import timm
 import timm.models.vision_transformer as vit
 import timm.models.swin_transformer as swin
-# import timm.models.efficientnet as effinet
- 
 from timm.models.helpers import load_state_dict
+from transformers import AutoModel
+
+class ArkInternImage(nn.Module):
+    """Wrapper around a timm InternImage backbone that provides the same
+    projector and omni_heads interface as ArkSwinTransformer.
+    """
+    def __init__(self, num_classes_list, projector_features=None, use_mlp=False, intern_model_name='internimage_base', *args, **kwargs):
+        super().__init__()
+        assert num_classes_list is not None
+
+        self.model_name = intern_model_name
+        self.backbone = AutoModel.from_pretrained(self.model_name, trust_remote_code=True, num_labels = 0)
+        
+
+        # encoder feature dimensionality provided by timm model
+        encoder_features = getattr(self.backbone.model, 'num_features', None)
+        if encoder_features is None:
+            # safe default for InternImage-B; adjust if you know exact dim
+            encoder_features = 896
+
+        # projector (optional and not tested)
+        self.projector = None
+        self.num_features = encoder_features
+        if projector_features:
+            self.num_features = projector_features
+            if use_mlp:
+                self.projector = nn.Sequential(nn.Linear(encoder_features, self.num_features), nn.ReLU(inplace=True), nn.Linear(self.num_features, self.num_features))
+            else:
+                self.projector = nn.Linear(encoder_features, self.num_features)
+
+        # multi-task heads
+        self.omni_heads = []
+        for num_classes in num_classes_list:
+            self.omni_heads.append(nn.Linear(self.num_features, num_classes) if num_classes > 0 else nn.Identity())
+        self.omni_heads = nn.ModuleList(self.omni_heads)
+
+    def forward(self, x, head_n=None):
+        # use model's forward_features; some timm versions return a spatial map (N,C,H,W)
+        # while others return pooled features (N,C). Handle both cases.
+
+        x = self.backbone(x)
+        x = x["hidden_states"][-1]
+
+        if x.ndim == 4:
+            x = x.mean((-2, -1))
+        if self.projector:
+            x = self.projector(x)
+        if head_n is not None:
+            return x, self.omni_heads[head_n](x)
+        else:
+            return [head(x) for head in self.omni_heads]
+
+    def generate_embeddings(self, x, after_proj=True):
+        x = self.backbone(pixel_values = x)
+        if x.ndim == 4:
+            x = x.mean((-2, -1))
+        if after_proj and self.projector:
+            x = self.projector(x)
+        return x
 
 class ArkConvNeXt(nn.Module):
     """Wrapper around a timm ConvNeXt backbone that provides the same
@@ -111,7 +168,7 @@ class ArkSwinTransformer(swin.SwinTransformer):
         if after_proj:
             x = self.projector(x)
         return x
-            
+
 def initialize_backbone(timm_name: str):
     sd = timm.create_model(timm_name, pretrained=True).state_dict()
     # remove any classifier heads commonly used by timm models
@@ -124,7 +181,8 @@ def build_omni_model_from_checkpoint(args, num_classes_list, key):
         model = ArkSwinTransformer(num_classes_list, args.projector_features, args.use_mlp, patch_size=4, window_size=7, embed_dim=128, depths=(2, 2, 18, 2), num_heads=(4, 8, 16, 32))
     elif args.model_name == "convnext_base":
         model = ArkConvNeXt(num_classes_list, args.projector_features, args.use_mlp, conv_model_name = "convnext_base")
-
+    elif args.model_name == "internimage_base":
+        model = ArkInternImage(num_classes_list, args.projector_features, args.use_mlp, intern_model_name = "OpenGVLab/internimage_b_1k_224")
     if args.init == "ImageNet_1k":
         if args.model_name == "swin_base":
             state_dict = initialize_backbone('swin_base_patch4_window7_224')
@@ -132,6 +190,9 @@ def build_omni_model_from_checkpoint(args, num_classes_list, key):
         if args.model_name == "convnext_base":
             state_dict = initialize_backbone('convnext_base.fb_in1k')
             msg = model.load_state_dict(state_dict, strict=False)
+        if args.model_name == "internimage_base":
+            # dont initilize since the model is already being loaded with pretrained weights from hugging face
+            msg = "Skipping pretrained-weight initialization for internimage since model is loaded with pretrained weights from hugging face"
         print('Loaded with msg: {}'.format(msg))
     
     if args.pretrained_weights is not None:
@@ -150,6 +211,9 @@ def build_omni_model(args, num_classes_list):
         model = ArkSwinTransformer(num_classes_list, args.projector_features, args.use_mlp, patch_size=4, window_size=7, embed_dim=128, depths=(2, 2, 18, 2), num_heads=(4, 8, 16, 32))
     elif args.model_name == "convnext_base":
         model = ArkConvNeXt(num_classes_list, args.projector_features, args.use_mlp, conv_model_name = "convnext_base")
+    elif args.model_name == "internimage_base":
+        model = ArkInternImage(num_classes_list, args.projector_features, args.use_mlp, intern_model_name = "OpenGVLab/internimage_b_1k_224")
+        
 
     if args.init == "ImageNet_1k":
         if args.model_name == "swin_base":
@@ -158,6 +222,9 @@ def build_omni_model(args, num_classes_list):
         if args.model_name == "convnext_base":
             state_dict = initialize_backbone('convnext_base.fb_in1k')
             msg = model.load_state_dict(state_dict, strict=False)
+        if args.model_name == "internimage_base":
+            # dont initilize since the model is already being loaded from pretrained weights
+            msg = "Skipping pretrained-weight initialization for internimage since model is loaded from pretrained weights"
         print('Loaded with msg: {}'.format(msg))
         
     if args.pretrained_weights is not None:
