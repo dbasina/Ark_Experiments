@@ -1,0 +1,6 @@
+epoch: 0,  train auc: 0.9482585888369504,   val auc: 0.9479524669379917,  test auc: 0.942336
+epoch: 1,  train auc: 0.976676533112842,   val auc: 0.9746404532856652,  test auc: 0.970428
+octmnist
+train  auc: 0.97668  acc: 0.91326
+val  auc: 0.97464  acc: 0.90953
+test  auc: 0.97043  acc: 0.75700
